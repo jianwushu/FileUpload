@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- Menu -->
+  <data name="Menu_File" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="Menu_Config" xml:space="preserve">
+    <value>&amp;Configuration</value>
+  </data>
+  <data name="Menu_Exit" xml:space="preserve">
+    <value>E&amp;xit</value>
+  </data>
+  <data name="Menu_Help" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>&amp;About</value>
+  </data>
+  
+  <!-- Main Form -->
+  <data name="Form_Title" xml:space="preserve">
+    <value>File Upload System</value>
+  </data>
+  <data name="Form_WindowTitle" xml:space="preserve">
+    <value>File Upload System v2.0</value>
+  </data>
+  <data name="Config_Title" xml:space="preserve">
+    <value>Configuration Information</value>
+  </data>
+  <data name="Label_DeviceId" xml:space="preserve">
+    <value>Device ID:</value>
+  </data>
+  <data name="Label_WatchFolder" xml:space="preserve">
+    <value>Watch Folder:</value>
+  </data>
+  <data name="Label_UploadUrl" xml:space="preserve">
+    <value>Upload URL:</value>
+  </data>
+  <data name="Label_ParseRule" xml:space="preserve">
+    <value>Parse Rule:</value>
+  </data>
+  <data name="Label_Status" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="Status_NotRunning" xml:space="preserve">
+    <value>Not Running</value>
+  </data>
+  <data name="Status_Running" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="Label_Total" xml:space="preserve">
+    <value>Total Files:</value>
+  </data>
+  <data name="Label_Success" xml:space="preserve">
+    <value>Success:</value>
+  </data>
+  <data name="Label_Failed" xml:space="preserve">
+    <value>Failed:</value>
+  </data>
+  <data name="Button_Start" xml:space="preserve">
+    <value>Start Task</value>
+  </data>
+  <data name="Button_Stop" xml:space="preserve">
+    <value>Stop Task</value>
+  </data>
+  <data name="Log_Title" xml:space="preserve">
+    <value>Log Information</value>
+  </data>
+  <data name="Button_ClearLog" xml:space="preserve">
+    <value>Clear Log</value>
+  </data>
+  
+  <!-- Config Form -->
+  <data name="ConfigForm_Title" xml:space="preserve">
+    <value>System Configuration</value>
+  </data>
+  <data name="Tab_Basic" xml:space="preserve">
+    <value>Basic Configuration</value>
+  </data>
+  <data name="Tab_Advanced" xml:space="preserve">
+    <value>Advanced Configuration</value>
+  </data>
+  <data name="Tab_Performance" xml:space="preserve">
+    <value>Performance Optimization</value>
+  </data>
+  <data name="Label_DeviceIdConfig" xml:space="preserve">
+    <value>Device ID:</value>
+  </data>
+  <data name="Label_UploadUrlConfig" xml:space="preserve">
+    <value>Upload URL:</value>
+  </data>
+  <data name="Label_AllowedExtensions" xml:space="preserve">
+    <value>Allowed File Extensions:</value>
+  </data>
+  <data name="Label_RequestTimeout" xml:space="preserve">
+    <value>Request Timeout (seconds):</value>
+  </data>
+  <data name="Label_ScanInterval" xml:space="preserve">
+    <value>File Scan Interval (seconds):</value>
+  </data>
+  <data name="Label_MaxRetryCount" xml:space="preserve">
+    <value>Max Retry Count:</value>
+  </data>
+  <data name="Label_WatchFolders" xml:space="preserve">
+    <value>Watch Folders List:</value>
+  </data>
+  <data name="Label_WatchFoldersList" xml:space="preserve">
+    <value>Watch Folders List:</value>
+  </data>
+  <data name="Button_AddFolder" xml:space="preserve">
+    <value>Add Folder</value>
+  </data>
+  <data name="Button_RemoveFolder" xml:space="preserve">
+    <value>Remove Folder</value>
+  </data>
+  <data name="CheckBox_ScanSubfolders" xml:space="preserve">
+    <value>Recursively scan subfolders (scan all nested directories)</value>
+  </data>
+  <data name="Label_ScanSubfolders" xml:space="preserve">
+    <value>Recursively scan subfolders (scan all nested directories)</value>
+  </data>
+  <data name="CheckBox_PreserveDirectory" xml:space="preserve">
+    <value>Preserve directory structure when moving to OK/NG</value>
+  </data>
+  <data name="Label_PreserveDirectoryStructure" xml:space="preserve">
+    <value>Preserve directory structure when moving to OK/NG</value>
+  </data>
+  <data name="Group_SystemTray" xml:space="preserve">
+    <value>System Tray Configuration</value>
+  </data>
+  <data name="CheckBox_SystemTrayEnabled" xml:space="preserve">
+    <value>Enable system tray functionality</value>
+  </data>
+  <data name="Label_EnableSystemTray" xml:space="preserve">
+    <value>Enable system tray functionality</value>
+  </data>
+  <data name="CheckBox_MinimizeToTray" xml:space="preserve">
+    <value>Automatically hide to tray when minimized</value>
+  </data>
+  <data name="Label_MinimizeToTray" xml:space="preserve">
+    <value>Automatically hide to tray when minimized</value>
+  </data>
+  <data name="Label_CloseAction" xml:space="preserve">
+    <value>Action when closing window:</value>
+  </data>
+  <data name="CloseAction_Ask" xml:space="preserve">
+    <value>Ask User</value>
+  </data>
+  <data name="CloseAction_Minimize" xml:space="preserve">
+    <value>Minimize to Tray</value>
+  </data>
+  <data name="CloseAction_Exit" xml:space="preserve">
+    <value>Exit Directly</value>
+  </data>
+  <data name="Group_ThreadPool" xml:space="preserve">
+    <value>Thread Pool Configuration</value>
+  </data>
+  <data name="CheckBox_EnableThreadPool" xml:space="preserve">
+    <value>Enable thread pool (for concurrent processing of large number of files)</value>
+  </data>
+  <data name="Label_EnableThreadPool" xml:space="preserve">
+    <value>Enable thread pool (for concurrent processing of large number of files)</value>
+  </data>
+  <data name="Label_ThreadPoolSize" xml:space="preserve">
+    <value>Thread Pool Size (concurrency count):</value>
+  </data>
+  <data name="Group_ImageCompression" xml:space="preserve">
+    <value>Image Compression Configuration</value>
+  </data>
+  <data name="CheckBox_EnableImageCompression" xml:space="preserve">
+    <value>Enable image compression (automatically compress large images)</value>
+  </data>
+  <data name="Label_EnableImageCompression" xml:space="preserve">
+    <value>Enable image compression (automatically compress large images)</value>
+  </data>
+  <data name="Label_CompressionThreshold" xml:space="preserve">
+    <value>Compression Threshold (KB, compress if larger than this value):</value>
+  </data>
+  <data name="Label_CompressionQuality" xml:space="preserve">
+    <value>Compression Quality (1-100, smaller value means higher compression):</value>
+  </data>
+  <data name="Button_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Button_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Label_Language" xml:space="preserve">
+    <value>Interface Language:</value>
+  </data>
+  <data name="Language_ChineseSimplified" xml:space="preserve">
+    <value>中文简体</value>
+  </data>
+  <data name="Language_ChineseTraditional" xml:space="preserve">
+    <value>繁体中文</value>
+  </data>
+  <data name="Language_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Language_Japanese" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="Language_Vietnamese" xml:space="preserve">
+    <value>Tiếng Việt</value>
+  </data>
+
+  <!-- About Form -->
+  <data name="AboutForm_Title" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>File Upload System</value>
+  </data>
+  <data name="About_WindowTitle" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>Version: 2.0</value>
+  </data>
+  <data name="About_Description" xml:space="preserve">
+    <value>A file upload application based on .NET 6.0 Windows Forms</value>
+  </data>
+  <data name="About_Features" xml:space="preserve">
+    <value>Main Features:
+
+✓ Can upload images</value>
+  </data>
+  <data name="About_Copyright" xml:space="preserve">
+    <value>© 2025 File Upload System. Powered by LUX EAP TEAM. All rights reserved.</value>
+  </data>
+  <data name="Button_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  
+  <!-- Messages -->
+  <data name="Message_ConfigSaved" xml:space="preserve">
+    <value>Configuration saved successfully!
+
+Do you want to restart the program now to apply the configuration?</value>
+  </data>
+  <data name="Message_ConfigSavedTitle" xml:space="preserve">
+    <value>Configuration Saved</value>
+  </data>
+  <data name="Message_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Message_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Message_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Message_Info" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Message_Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Message_NotConfigured" xml:space="preserve">
+    <value>Not Configured</value>
+  </data>
+  <data name="Message_FolderExists" xml:space="preserve">
+    <value>This folder is already in the watch list</value>
+  </data>
+  <data name="Message_SelectFolder" xml:space="preserve">
+    <value>Please select a folder to remove first</value>
+  </data>
+  <data name="Message_MinimizeToTray" xml:space="preserve">
+    <value>Do you want to minimize to system tray?
+
+Click "Yes" to minimize to tray
+Click "No" to exit the program</value>
+  </data>
+  <data name="Tray_ShowMainWindow" xml:space="preserve">
+    <value>Show Main Window</value>
+  </data>
+  <data name="Tray_StartTask" xml:space="preserve">
+    <value>Start Task</value>
+  </data>
+  <data name="Tray_StopTask" xml:space="preserve">
+    <value>Stop Task</value>
+  </data>
+  <data name="Tray_OpenConfig" xml:space="preserve">
+    <value>Open Configuration</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>Exit Program</value>
+  </data>
+  <data name="Tray_MinimizedMessage" xml:space="preserve">
+    <value>Program has been minimized to system tray</value>
+  </data>
+</root>
+

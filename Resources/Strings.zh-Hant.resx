@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- 菜單 -->
+  <data name="Menu_File" xml:space="preserve">
+    <value>檔案(&amp;F)</value>
+  </data>
+  <data name="Menu_Config" xml:space="preserve">
+    <value>系統配置(&amp;C)</value>
+  </data>
+  <data name="Menu_Exit" xml:space="preserve">
+    <value>退出(&amp;X)</value>
+  </data>
+  <data name="Menu_Help" xml:space="preserve">
+    <value>幫助(&amp;H)</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>關於(&amp;A)</value>
+  </data>
+  
+  <!-- 主窗體 -->
+  <data name="Form_Title" xml:space="preserve">
+    <value>檔案上傳系統</value>
+  </data>
+  <data name="Form_WindowTitle" xml:space="preserve">
+    <value>檔案上傳系統 v2.0</value>
+  </data>
+  <data name="Config_Title" xml:space="preserve">
+    <value>配置資訊</value>
+  </data>
+  <data name="Label_DeviceId" xml:space="preserve">
+    <value>設備編號：</value>
+  </data>
+  <data name="Label_WatchFolder" xml:space="preserve">
+    <value>監控資料夾：</value>
+  </data>
+  <data name="Label_UploadUrl" xml:space="preserve">
+    <value>上傳介面：</value>
+  </data>
+  <data name="Label_ParseRule" xml:space="preserve">
+    <value>解析規則：</value>
+  </data>
+  <data name="Label_Status" xml:space="preserve">
+    <value>狀態：</value>
+  </data>
+  <data name="Status_NotRunning" xml:space="preserve">
+    <value>未運行</value>
+  </data>
+  <data name="Status_Running" xml:space="preserve">
+    <value>運行中</value>
+  </data>
+  <data name="Label_Total" xml:space="preserve">
+    <value>總檔案：</value>
+  </data>
+  <data name="Label_Success" xml:space="preserve">
+    <value>成功數：</value>
+  </data>
+  <data name="Label_Failed" xml:space="preserve">
+    <value>失敗數：</value>
+  </data>
+  <data name="Button_Start" xml:space="preserve">
+    <value>開始任務</value>
+  </data>
+  <data name="Button_Stop" xml:space="preserve">
+    <value>停止任務</value>
+  </data>
+  <data name="Log_Title" xml:space="preserve">
+    <value>日誌資訊</value>
+  </data>
+  <data name="Button_ClearLog" xml:space="preserve">
+    <value>清空日誌</value>
+  </data>
+  
+  <!-- 配置窗體 -->
+  <data name="ConfigForm_Title" xml:space="preserve">
+    <value>系統配置</value>
+  </data>
+  <data name="Tab_Basic" xml:space="preserve">
+    <value>基本配置</value>
+  </data>
+  <data name="Tab_Advanced" xml:space="preserve">
+    <value>進階配置</value>
+  </data>
+  <data name="Tab_Performance" xml:space="preserve">
+    <value>效能優化</value>
+  </data>
+  <data name="Label_DeviceIdConfig" xml:space="preserve">
+    <value>設備編號:</value>
+  </data>
+  <data name="Label_UploadUrlConfig" xml:space="preserve">
+    <value>上傳介面URL:</value>
+  </data>
+  <data name="Label_AllowedExtensions" xml:space="preserve">
+    <value>允許的檔案副檔名:</value>
+  </data>
+  <data name="Label_RequestTimeout" xml:space="preserve">
+    <value>請求逾時時間(秒):</value>
+  </data>
+  <data name="Label_ScanInterval" xml:space="preserve">
+    <value>檔案掃描間隔(秒):</value>
+  </data>
+  <data name="Label_MaxRetryCount" xml:space="preserve">
+    <value>最大重試次數:</value>
+  </data>
+  <data name="Label_WatchFolders" xml:space="preserve">
+    <value>監控資料夾清單:</value>
+  </data>
+  <data name="Label_WatchFoldersList" xml:space="preserve">
+    <value>監控資料夾清單:</value>
+  </data>
+  <data name="Button_AddFolder" xml:space="preserve">
+    <value>新增資料夾</value>
+  </data>
+  <data name="Button_RemoveFolder" xml:space="preserve">
+    <value>移除資料夾</value>
+  </data>
+  <data name="CheckBox_ScanSubfolders" xml:space="preserve">
+    <value>遞迴掃描子資料夾(掃描所有巢狀目錄)</value>
+  </data>
+  <data name="Label_ScanSubfolders" xml:space="preserve">
+    <value>遞迴掃描子資料夾（掃描所有巢狀目錄）</value>
+  </data>
+  <data name="CheckBox_PreserveDirectory" xml:space="preserve">
+    <value>移動到OK/NG時保留目錄結構</value>
+  </data>
+  <data name="Label_PreserveDirectoryStructure" xml:space="preserve">
+    <value>移動到OK/NG時保留目錄結構</value>
+  </data>
+  <data name="Group_SystemTray" xml:space="preserve">
+    <value>系統托盤配置</value>
+  </data>
+  <data name="CheckBox_SystemTrayEnabled" xml:space="preserve">
+    <value>啟用系統托盤功能</value>
+  </data>
+  <data name="Label_EnableSystemTray" xml:space="preserve">
+    <value>啟用系統托盤功能</value>
+  </data>
+  <data name="CheckBox_MinimizeToTray" xml:space="preserve">
+    <value>最小化時自動隱藏到托盤</value>
+  </data>
+  <data name="Label_MinimizeToTray" xml:space="preserve">
+    <value>最小化時自動隱藏到托盤</value>
+  </data>
+  <data name="Label_CloseAction" xml:space="preserve">
+    <value>關閉視窗時的行為:</value>
+  </data>
+  <data name="CloseAction_Ask" xml:space="preserve">
+    <value>詢問使用者</value>
+  </data>
+  <data name="CloseAction_Minimize" xml:space="preserve">
+    <value>最小化到托盤</value>
+  </data>
+  <data name="CloseAction_Exit" xml:space="preserve">
+    <value>直接退出</value>
+  </data>
+  <data name="Group_ThreadPool" xml:space="preserve">
+    <value>執行緒池配置</value>
+  </data>
+  <data name="CheckBox_EnableThreadPool" xml:space="preserve">
+    <value>啟用執行緒池(用於並行處理大量檔案)</value>
+  </data>
+  <data name="Label_EnableThreadPool" xml:space="preserve">
+    <value>啟用執行緒池（用於並行處理大量檔案）</value>
+  </data>
+  <data name="Label_ThreadPoolSize" xml:space="preserve">
+    <value>執行緒池大小（並行數量）:</value>
+  </data>
+  <data name="Group_ImageCompression" xml:space="preserve">
+    <value>圖片壓縮配置</value>
+  </data>
+  <data name="CheckBox_EnableImageCompression" xml:space="preserve">
+    <value>啟用圖片壓縮(自動壓縮大圖片)</value>
+  </data>
+  <data name="Label_EnableImageCompression" xml:space="preserve">
+    <value>啟用圖片壓縮（自動壓縮大圖片）</value>
+  </data>
+  <data name="Label_CompressionThreshold" xml:space="preserve">
+    <value>壓縮閾值（KB，大於此值將壓縮）:</value>
+  </data>
+  <data name="Label_CompressionQuality" xml:space="preserve">
+    <value>壓縮品質（1-100，值越小壓縮率越高）:</value>
+  </data>
+  <data name="Button_Save" xml:space="preserve">
+    <value>儲存</value>
+  </data>
+  <data name="Button_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Label_Language" xml:space="preserve">
+    <value>介面語言:</value>
+  </data>
+  <data name="Language_ChineseSimplified" xml:space="preserve">
+    <value>中文简体</value>
+  </data>
+  <data name="Language_ChineseTraditional" xml:space="preserve">
+    <value>繁体中文</value>
+  </data>
+  <data name="Language_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Language_Japanese" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="Language_Vietnamese" xml:space="preserve">
+    <value>Tiếng Việt</value>
+  </data>
+
+  <!-- 關於窗體 -->
+  <data name="AboutForm_Title" xml:space="preserve">
+    <value>關於</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>檔案上傳系統</value>
+  </data>
+  <data name="About_WindowTitle" xml:space="preserve">
+    <value>關於</value>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>版本: 2.0</value>
+  </data>
+  <data name="About_Description" xml:space="preserve">
+    <value>一個基於 .NET 6.0 Windows Forms 的檔案上傳應用程式</value>
+  </data>
+  <data name="About_Features" xml:space="preserve">
+    <value>主要功能:
+
+✓ 可以傳圖片</value>
+  </data>
+  <data name="About_Copyright" xml:space="preserve">
+    <value>© 2025 檔案上傳系統.Powered by LUX EAP TEAM. All rights reserved.</value>
+  </data>
+  <data name="Button_Close" xml:space="preserve">
+    <value>關閉</value>
+  </data>
+  
+  <!-- 訊息提示 -->
+  <data name="Message_ConfigSaved" xml:space="preserve">
+    <value>配置已儲存成功！
+
+是否立即重新啟動程式以使配置生效？</value>
+  </data>
+  <data name="Message_ConfigSavedTitle" xml:space="preserve">
+    <value>配置已儲存</value>
+  </data>
+  <data name="Message_Error" xml:space="preserve">
+    <value>錯誤</value>
+  </data>
+  <data name="Message_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="Message_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Message_Info" xml:space="preserve">
+    <value>提示</value>
+  </data>
+  <data name="Message_Confirm" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="Message_NotConfigured" xml:space="preserve">
+    <value>未配置</value>
+  </data>
+  <data name="Message_FolderExists" xml:space="preserve">
+    <value>該資料夾已在監控清單中</value>
+  </data>
+  <data name="Message_SelectFolder" xml:space="preserve">
+    <value>請先選擇要移除的資料夾</value>
+  </data>
+  <data name="Message_MinimizeToTray" xml:space="preserve">
+    <value>是否最小化到系統托盤?
+
+點擊"是"最小化到托盤
+點擊"否"退出程式</value>
+  </data>
+  <data name="Tray_ShowMainWindow" xml:space="preserve">
+    <value>顯示主視窗</value>
+  </data>
+  <data name="Tray_StartTask" xml:space="preserve">
+    <value>開始任務</value>
+  </data>
+  <data name="Tray_StopTask" xml:space="preserve">
+    <value>停止任務</value>
+  </data>
+  <data name="Tray_OpenConfig" xml:space="preserve">
+    <value>開啟配置</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>退出程式</value>
+  </data>
+  <data name="Tray_MinimizedMessage" xml:space="preserve">
+    <value>程式已最小化到系統托盤</value>
+  </data>
+</root>
+

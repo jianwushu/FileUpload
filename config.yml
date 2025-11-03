@@ -1,0 +1,197 @@
+# 文件上传程序配置文件
+
+# 设备编号
+deviceId: IMG-TEST-01
+
+# 上传接口URL
+uploadUrl: http://10.18.53.14:8081/GwService/SendDataToMES
+
+language: 
+
+# 监控的文件夹列表（支持多个文件夹）
+# 如果配置了 watchFolders，则 watchFolder 配置将被忽略
+watchFolders:
+  - D:\Upload\Watch
+  # - D:\Upload\Watch2
+  # - E:\Images
+
+# 是否扫描子文件夹（递归扫描）
+# true: 扫描监控文件夹及其所有子文件夹
+# false: 仅扫描监控文件夹根目录
+scanSubfolders: false
+
+# 移动到OK/NG文件夹时是否保留目录结构
+# true: 保留原始的子目录结构，例如 image/2025/10/30/test.jpg -> OK/image/2025/10/30/test.jpg
+# false: 所有文件直接放到 OK 或 NG 根目录，例如 image/2025/10/30/test.jpg -> OK/test.jpg
+preserveDirectoryStructure: false
+
+# 上传命令
+command: SENDDATA
+
+# 允许的文件后缀（逗号分隔）
+allowedExtensions: .jpg,.jpeg,.png,.gif,.bmp #,.pdf,.doc,.docx,.xls,.xlsx
+
+# HTTP请求超时时间（秒）
+requestTimeout: 30
+
+# 文件扫描间隔（秒）
+scanInterval: 5
+
+# 最大重试次数
+maxRetryCount: 3
+
+# 是否自动创建OK/NG文件夹
+autoCreateFolders: true
+
+# JSON请求体配置
+jsonRequestBody:
+  # JSON字段名称（默认为strjson）
+  fieldName: strjson
+
+  # 固定参数（不从文件名提取的参数）
+  fixedParams:
+    LOTNO: ""
+    UPLOADER: ""
+    # 注意: 如果需要使用文件修改时间，请将 MODIFYTIME 移到 autoGenerateParams 中，并设置值为 MODIFYTIME
+    MODIFYTIME: ""
+
+  # 需要从文件名提取的参数列表
+  # 注意: 如果文件名中包含时间信息，可以在这里配置 CREATETIME
+  #       如果需要使用文件属性的创建时间，请将 CREATETIME 移到 autoGenerateParams 中，并设置值为 CREATETIME
+  extractParams:
+    #- MACHINENO
+    - BARCODE
+    - TOOLINGNO
+    - CAVITYNO
+    - FILETYPE
+    - FOLDERTYPE
+    - CREATETIME
+
+  # 自动生成的参数配置
+  # 支持的类型:
+  #   - FILENAME: 文件名（含扩展名）
+  #   - CREATETIME: 文件创建时间（从文件属性获取，格式: yyyyMMddHHmmss）
+  #   - MODIFYTIME: 文件修改时间（从文件属性获取，格式: yyyyMMddHHmmss）
+  #   - DATETIME: 当前系统时间（格式: yyyyMMddHHmmss）
+  #   - COMPUTERNO: 计算机名称
+  #   - COMPUTERIP: 计算机IP地址
+  #   - LOCAL_PATH: 文件所在目录路径
+  #   - FILESIZE/ORI_FILESIZE_KB: 文件大小（KB）
+  # 或者直接指定固定值
+  autoGenerateParams:
+    FILENAME: FILENAME
+    COMPUTERNO: COMPUTERNO
+    COMPUTERIP: COMPUTERIP
+    LOCAL_PATH: LOCAL_PATH
+    ORI_FILESIZE_KB: ORI_FILESIZE_KB
+
+# 文件名解析规则
+fileNameParseRules:
+  # 是否启用文件名解析
+  enabled: true
+
+  # 文件名分隔符
+  separator: _
+
+  # 是否拒绝空值（当文件名匹配值为空时，认为图片生成异常，移到NG文件夹）
+  # 默认为 false，即允许空值
+  # 设置为 true 时，如果从文件名中提取的参数值为空或未提取到，将直接移到NG文件夹，不进行上传
+  rejectEmptyValues: true
+
+  # ========== 推荐使用模板方式（最简单直观） ==========
+  # 解析模板：使用 {参数名} 占位符定义文件名格式
+  # 示例文件名: AOI-021_11S55HFF096X6_R05A_CR0395_A2_20250627215811_GW_1_AOI_OK.jpg
+  # 解析规则: {MACHINENO}_{BARCODE}_{TOOLINGNO}_{CAVITYNO}_{CREATETIME}_{}_{}_{FILETYPE}_{FOLDERTYPE}
+  # 说明:
+  #   - 使用 {} 表示忽略该位置的值
+  template: #"{MACHINENO}_{BARCODE}_{TOOLINGNO}_{TOOLINGNO}_{CAVITYNO}_{CREATETIME}_{}_{}_{FILETYPE}_{FOLDERTYPE}"
+
+  # ========== 以下是其他解析方式（可选） ==========
+
+  # 方式1: 位置映射（简单场景和跨分段场景）
+  # 参数映射规则（参数名 -> 位置或范围）
+  # 支持两种格式:
+  #   - 单个位置: "0" 表示第0个分段
+  #   - 范围: "2-3" 表示从第2段到第3段合并
+  # 示例:
+  positionMapping:
+    #MACHINENO: "0"
+    BARCODE: "1"
+    TOOLINGNO: "2-3"
+    CAVITYNO: "4"
+    CREATETIME: "5"
+    FILETYPE: "8"
+    FOLDERTYPE: "9"
+
+  # 方式2: 正则表达式（复杂场景）
+  # 正则表达式解析规则（参数名 -> 正则表达式）
+  regexMapping:
+    # BARCODE: "^[^_]+_([^_]+)"
+    # MACHINENO: "^([^_]+)"
+
+# ========== 性能优化配置 ==========
+
+# 是否启用线程池（用于并发处理大量文件）
+enableThreadPool: false
+
+# 线程池大小（并发处理的文件数量，建议2-5）
+threadPoolSize: 3
+
+# ========== 图片压缩配置 ==========
+
+# 是否启用图片压缩
+enableImageCompression: false
+
+# 图片压缩阈值（KB），大于此值的图片将被压缩
+compressionThresholdKB: 500
+
+# 图片压缩质量（1-100），值越小压缩率越高，建议60-85
+compressionQuality: 75
+
+
+# ========== 时间参数使用说明 ==========
+#
+# 时间参数有三种获取方式:
+#
+# 1. 从文件名中提取（适用于文件名包含时间信息的场景）
+#    配置方式: 将 CREATETIME 添加到 extractParams 列表中
+#    示例文件名: AOI-021_11S55HFF096X6_R05A_CR0395_A2_20250627215811_GW_1_AOI_OK.jpg
+#    extractParams:
+#      - CREATETIME
+#    positionMapping:
+#      CREATETIME: "5"  # 提取第5个分段: 20250627215811
+#
+# 2. 从文件属性中获取（推荐方式，适用于需要真实文件时间的场景）
+#    配置方式: 将时间参数添加到 autoGenerateParams 中
+#    autoGenerateParams:
+#      CREATETIME: CREATETIME    # 使用文件创建时间
+#      MODIFYTIME: MODIFYTIME    # 使用文件修改时间
+#    说明:
+#      - CREATETIME: 获取文件的创建时间（CreationTime）
+#      - MODIFYTIME: 获取文件的最后修改时间（LastWriteTime）
+#      - 时间格式统一为: yyyyMMddHHmmss (例如: 20250627215811)
+#
+# 3. 使用当前系统时间
+#    配置方式: 使用 DATETIME 类型
+#    autoGenerateParams:
+#      UPLOADTIME: DATETIME      # 使用当前系统时间
+#
+# 注意事项:
+#   - 同一个参数名只能使用一种方式，不要同时在 extractParams 和 autoGenerateParams 中配置
+#   - 如果既需要文件名中的时间，又需要文件属性时间，请使用不同的参数名
+#     例如: FILE_CREATETIME (从文件名提取), SYS_CREATETIME (从文件属性获取)
+
+
+# 系统托盘配置
+systemTray:
+  # 是否启用系统托盘功能
+  enabled: true
+
+  # 最小化时是否自动隐藏到托盘
+  minimizeToTray: true
+
+  # 关闭窗口时的默认行为
+  # minimize: 最小化到托盘
+  # exit: 直接退出
+  # ask: 询问用户
+  closeAction: ask

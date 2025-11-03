@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- メニュー -->
+  <data name="Menu_File" xml:space="preserve">
+    <value>ファイル(&amp;F)</value>
+  </data>
+  <data name="Menu_Config" xml:space="preserve">
+    <value>システム設定(&amp;C)</value>
+  </data>
+  <data name="Menu_Exit" xml:space="preserve">
+    <value>終了(&amp;X)</value>
+  </data>
+  <data name="Menu_Help" xml:space="preserve">
+    <value>ヘルプ(&amp;H)</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>バージョン情報(&amp;A)</value>
+  </data>
+  
+  <!-- メインフォーム -->
+  <data name="Form_Title" xml:space="preserve">
+    <value>ファイルアップロードシステム</value>
+  </data>
+  <data name="Form_WindowTitle" xml:space="preserve">
+    <value>ファイルアップロードシステム v2.0</value>
+  </data>
+  <data name="Config_Title" xml:space="preserve">
+    <value>設定情報</value>
+  </data>
+  <data name="Label_DeviceId" xml:space="preserve">
+    <value>デバイスID：</value>
+  </data>
+  <data name="Label_WatchFolder" xml:space="preserve">
+    <value>監視フォルダ：</value>
+  </data>
+  <data name="Label_UploadUrl" xml:space="preserve">
+    <value>アップロードURL：</value>
+  </data>
+  <data name="Label_ParseRule" xml:space="preserve">
+    <value>解析ルール：</value>
+  </data>
+  <data name="Label_Status" xml:space="preserve">
+    <value>ステータス：</value>
+  </data>
+  <data name="Status_NotRunning" xml:space="preserve">
+    <value>停止中</value>
+  </data>
+  <data name="Status_Running" xml:space="preserve">
+    <value>実行中</value>
+  </data>
+  <data name="Label_Total" xml:space="preserve">
+    <value>総ファイル数：</value>
+  </data>
+  <data name="Label_Success" xml:space="preserve">
+    <value>成功数：</value>
+  </data>
+  <data name="Label_Failed" xml:space="preserve">
+    <value>失敗数：</value>
+  </data>
+  <data name="Button_Start" xml:space="preserve">
+    <value>タスク開始</value>
+  </data>
+  <data name="Button_Stop" xml:space="preserve">
+    <value>タスク停止</value>
+  </data>
+  <data name="Log_Title" xml:space="preserve">
+    <value>ログ情報</value>
+  </data>
+  <data name="Button_ClearLog" xml:space="preserve">
+    <value>ログクリア</value>
+  </data>
+  
+  <!-- 設定フォーム -->
+  <data name="ConfigForm_Title" xml:space="preserve">
+    <value>システム設定</value>
+  </data>
+  <data name="Tab_Basic" xml:space="preserve">
+    <value>基本設定</value>
+  </data>
+  <data name="Tab_Advanced" xml:space="preserve">
+    <value>詳細設定</value>
+  </data>
+  <data name="Tab_Performance" xml:space="preserve">
+    <value>パフォーマンス最適化</value>
+  </data>
+  <data name="Label_DeviceIdConfig" xml:space="preserve">
+    <value>デバイスID:</value>
+  </data>
+  <data name="Label_UploadUrlConfig" xml:space="preserve">
+    <value>アップロードURL:</value>
+  </data>
+  <data name="Label_AllowedExtensions" xml:space="preserve">
+    <value>許可するファイル拡張子:</value>
+  </data>
+  <data name="Label_RequestTimeout" xml:space="preserve">
+    <value>リクエストタイムアウト(秒):</value>
+  </data>
+  <data name="Label_ScanInterval" xml:space="preserve">
+    <value>ファイルスキャン間隔(秒):</value>
+  </data>
+  <data name="Label_MaxRetryCount" xml:space="preserve">
+    <value>最大リトライ回数:</value>
+  </data>
+  <data name="Label_WatchFolders" xml:space="preserve">
+    <value>監視フォルダリスト:</value>
+  </data>
+  <data name="Label_WatchFoldersList" xml:space="preserve">
+    <value>監視フォルダリスト:</value>
+  </data>
+  <data name="Button_AddFolder" xml:space="preserve">
+    <value>フォルダ追加</value>
+  </data>
+  <data name="Button_RemoveFolder" xml:space="preserve">
+    <value>フォルダ削除</value>
+  </data>
+  <data name="CheckBox_ScanSubfolders" xml:space="preserve">
+    <value>サブフォルダを再帰的にスキャン(すべてのネストされたディレクトリをスキャン)</value>
+  </data>
+  <data name="Label_ScanSubfolders" xml:space="preserve">
+    <value>サブフォルダを再帰的にスキャン（すべてのネストされたディレクトリをスキャン）</value>
+  </data>
+  <data name="CheckBox_PreserveDirectory" xml:space="preserve">
+    <value>OK/NGに移動する際にディレクトリ構造を保持</value>
+  </data>
+  <data name="Label_PreserveDirectoryStructure" xml:space="preserve">
+    <value>OK/NGに移動する際にディレクトリ構造を保持</value>
+  </data>
+  <data name="Group_SystemTray" xml:space="preserve">
+    <value>システムトレイ設定</value>
+  </data>
+  <data name="CheckBox_SystemTrayEnabled" xml:space="preserve">
+    <value>システムトレイ機能を有効にする</value>
+  </data>
+  <data name="Label_EnableSystemTray" xml:space="preserve">
+    <value>システムトレイ機能を有効にする</value>
+  </data>
+  <data name="CheckBox_MinimizeToTray" xml:space="preserve">
+    <value>最小化時に自動的にトレイに隠す</value>
+  </data>
+  <data name="Label_MinimizeToTray" xml:space="preserve">
+    <value>最小化時に自動的にトレイに隠す</value>
+  </data>
+  <data name="Label_CloseAction" xml:space="preserve">
+    <value>ウィンドウを閉じる時の動作:</value>
+  </data>
+  <data name="CloseAction_Ask" xml:space="preserve">
+    <value>ユーザーに確認</value>
+  </data>
+  <data name="CloseAction_Minimize" xml:space="preserve">
+    <value>トレイに最小化</value>
+  </data>
+  <data name="CloseAction_Exit" xml:space="preserve">
+    <value>直接終了</value>
+  </data>
+  <data name="Group_ThreadPool" xml:space="preserve">
+    <value>スレッドプール設定</value>
+  </data>
+  <data name="CheckBox_EnableThreadPool" xml:space="preserve">
+    <value>スレッドプールを有効にする(大量のファイルを並行処理)</value>
+  </data>
+  <data name="Label_EnableThreadPool" xml:space="preserve">
+    <value>スレッドプールを有効にする（大量のファイルを並行処理）</value>
+  </data>
+  <data name="Label_ThreadPoolSize" xml:space="preserve">
+    <value>スレッドプールサイズ（並行数）:</value>
+  </data>
+  <data name="Group_ImageCompression" xml:space="preserve">
+    <value>画像圧縮設定</value>
+  </data>
+  <data name="CheckBox_EnableImageCompression" xml:space="preserve">
+    <value>画像圧縮を有効にする(大きな画像を自動圧縮)</value>
+  </data>
+  <data name="Label_EnableImageCompression" xml:space="preserve">
+    <value>画像圧縮を有効にする（大きな画像を自動圧縮）</value>
+  </data>
+  <data name="Label_CompressionThreshold" xml:space="preserve">
+    <value>圧縮しきい値（KB、この値より大きい場合圧縮）:</value>
+  </data>
+  <data name="Label_CompressionQuality" xml:space="preserve">
+    <value>圧縮品質（1-100、値が小さいほど圧縮率が高い）:</value>
+  </data>
+  <data name="Button_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Button_Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="Label_Language" xml:space="preserve">
+    <value>インターフェース言語:</value>
+  </data>
+  <data name="Language_ChineseSimplified" xml:space="preserve">
+    <value>中文简体</value>
+  </data>
+  <data name="Language_ChineseTraditional" xml:space="preserve">
+    <value>繁体中文</value>
+  </data>
+  <data name="Language_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Language_Japanese" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="Language_Vietnamese" xml:space="preserve">
+    <value>Tiếng Việt</value>
+  </data>
+
+  <!-- バージョン情報フォーム -->
+  <data name="AboutForm_Title" xml:space="preserve">
+    <value>バージョン情報</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>ファイルアップロードシステム</value>
+  </data>
+  <data name="About_WindowTitle" xml:space="preserve">
+    <value>バージョン情報</value>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>バージョン: 2.0</value>
+  </data>
+  <data name="About_Description" xml:space="preserve">
+    <value>.NET 6.0 Windows Formsベースのファイルアップロードアプリケーション</value>
+  </data>
+  <data name="About_Features" xml:space="preserve">
+    <value>主な機能:
+
+✓ 画像をアップロードできます</value>
+  </data>
+  <data name="About_Copyright" xml:space="preserve">
+    <value>© 2025 ファイルアップロードシステム.Powered by LUX EAP TEAM. All rights reserved.</value>
+  </data>
+  <data name="Button_Close" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  
+  <!-- メッセージ -->
+  <data name="Message_ConfigSaved" xml:space="preserve">
+    <value>設定が正常に保存されました！
+
+設定を有効にするためにプログラムを再起動しますか？</value>
+  </data>
+  <data name="Message_ConfigSavedTitle" xml:space="preserve">
+    <value>設定が保存されました</value>
+  </data>
+  <data name="Message_Error" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="Message_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="Message_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Message_Info" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="Message_Confirm" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="Message_NotConfigured" xml:space="preserve">
+    <value>未設定</value>
+  </data>
+  <data name="Message_FolderExists" xml:space="preserve">
+    <value>このフォルダは既に監視リストに含まれています</value>
+  </data>
+  <data name="Message_SelectFolder" xml:space="preserve">
+    <value>削除するフォルダを選択してください</value>
+  </data>
+  <data name="Message_MinimizeToTray" xml:space="preserve">
+    <value>システムトレイに最小化しますか？
+
+「はい」をクリックするとトレイに最小化
+「いいえ」をクリックするとプログラムを終了</value>
+  </data>
+  <data name="Tray_ShowMainWindow" xml:space="preserve">
+    <value>メインウィンドウを表示</value>
+  </data>
+  <data name="Tray_StartTask" xml:space="preserve">
+    <value>タスク開始</value>
+  </data>
+  <data name="Tray_StopTask" xml:space="preserve">
+    <value>タスク停止</value>
+  </data>
+  <data name="Tray_OpenConfig" xml:space="preserve">
+    <value>設定を開く</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>プログラムを終了</value>
+  </data>
+  <data name="Tray_MinimizedMessage" xml:space="preserve">
+    <value>プログラムはシステムトレイに最小化されました</value>
+  </data>
+</root>
+

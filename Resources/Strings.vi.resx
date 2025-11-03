@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- Menu -->
+  <data name="Menu_File" xml:space="preserve">
+    <value>Tệp(&amp;F)</value>
+  </data>
+  <data name="Menu_Config" xml:space="preserve">
+    <value>Cấu hình hệ thống(&amp;C)</value>
+  </data>
+  <data name="Menu_Exit" xml:space="preserve">
+    <value>Thoát(&amp;X)</value>
+  </data>
+  <data name="Menu_Help" xml:space="preserve">
+    <value>Trợ giúp(&amp;H)</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>Giới thiệu(&amp;A)</value>
+  </data>
+  
+  <!-- Form chính -->
+  <data name="Form_Title" xml:space="preserve">
+    <value>Hệ thống tải lên tệp</value>
+  </data>
+  <data name="Form_WindowTitle" xml:space="preserve">
+    <value>Hệ thống tải lên tệp v2.0</value>
+  </data>
+  <data name="Config_Title" xml:space="preserve">
+    <value>Thông tin cấu hình</value>
+  </data>
+  <data name="Label_DeviceId" xml:space="preserve">
+    <value>Mã thiết bị：</value>
+  </data>
+  <data name="Label_WatchFolder" xml:space="preserve">
+    <value>Thư mục giám sát：</value>
+  </data>
+  <data name="Label_UploadUrl" xml:space="preserve">
+    <value>URL tải lên：</value>
+  </data>
+  <data name="Label_ParseRule" xml:space="preserve">
+    <value>Quy tắc phân tích：</value>
+  </data>
+  <data name="Label_Status" xml:space="preserve">
+    <value>Trạng thái：</value>
+  </data>
+  <data name="Status_NotRunning" xml:space="preserve">
+    <value>Chưa chạy</value>
+  </data>
+  <data name="Status_Running" xml:space="preserve">
+    <value>Đang chạy</value>
+  </data>
+  <data name="Label_Total" xml:space="preserve">
+    <value>Tổng tệp：</value>
+  </data>
+  <data name="Label_Success" xml:space="preserve">
+    <value>Thành công：</value>
+  </data>
+  <data name="Label_Failed" xml:space="preserve">
+    <value>Thất bại：</value>
+  </data>
+  <data name="Button_Start" xml:space="preserve">
+    <value>Bắt đầu tác vụ</value>
+  </data>
+  <data name="Button_Stop" xml:space="preserve">
+    <value>Dừng tác vụ</value>
+  </data>
+  <data name="Log_Title" xml:space="preserve">
+    <value>Thông tin nhật ký</value>
+  </data>
+  <data name="Button_ClearLog" xml:space="preserve">
+    <value>Xóa nhật ký</value>
+  </data>
+  
+  <!-- Form cấu hình -->
+  <data name="ConfigForm_Title" xml:space="preserve">
+    <value>Cấu hình hệ thống</value>
+  </data>
+  <data name="Tab_Basic" xml:space="preserve">
+    <value>Cấu hình cơ bản</value>
+  </data>
+  <data name="Tab_Advanced" xml:space="preserve">
+    <value>Cấu hình nâng cao</value>
+  </data>
+  <data name="Tab_Performance" xml:space="preserve">
+    <value>Tối ưu hóa hiệu suất</value>
+  </data>
+  <data name="Label_DeviceIdConfig" xml:space="preserve">
+    <value>Mã thiết bị:</value>
+  </data>
+  <data name="Label_UploadUrlConfig" xml:space="preserve">
+    <value>URL tải lên:</value>
+  </data>
+  <data name="Label_AllowedExtensions" xml:space="preserve">
+    <value>Phần mở rộng tệp được phép:</value>
+  </data>
+  <data name="Label_RequestTimeout" xml:space="preserve">
+    <value>Thời gian chờ yêu cầu(giây):</value>
+  </data>
+  <data name="Label_ScanInterval" xml:space="preserve">
+    <value>Khoảng thời gian quét tệp(giây):</value>
+  </data>
+  <data name="Label_MaxRetryCount" xml:space="preserve">
+    <value>Số lần thử lại tối đa:</value>
+  </data>
+  <data name="Label_WatchFolders" xml:space="preserve">
+    <value>Danh sách thư mục giám sát:</value>
+  </data>
+  <data name="Label_WatchFoldersList" xml:space="preserve">
+    <value>Danh sách thư mục giám sát:</value>
+  </data>
+  <data name="Button_AddFolder" xml:space="preserve">
+    <value>Thêm thư mục</value>
+  </data>
+  <data name="Button_RemoveFolder" xml:space="preserve">
+    <value>Xóa thư mục</value>
+  </data>
+  <data name="CheckBox_ScanSubfolders" xml:space="preserve">
+    <value>Quét đệ quy các thư mục con (quét tất cả các thư mục lồng nhau)</value>
+  </data>
+  <data name="Label_ScanSubfolders" xml:space="preserve">
+    <value>Quét đệ quy các thư mục con (quét tất cả các thư mục lồng nhau)</value>
+  </data>
+  <data name="CheckBox_PreserveDirectory" xml:space="preserve">
+    <value>Giữ cấu trúc thư mục khi di chuyển đến OK/NG</value>
+  </data>
+  <data name="Label_PreserveDirectoryStructure" xml:space="preserve">
+    <value>Giữ cấu trúc thư mục khi di chuyển đến OK/NG</value>
+  </data>
+  <data name="Group_SystemTray" xml:space="preserve">
+    <value>Cấu hình khay hệ thống</value>
+  </data>
+  <data name="CheckBox_SystemTrayEnabled" xml:space="preserve">
+    <value>Bật chức năng khay hệ thống</value>
+  </data>
+  <data name="Label_EnableSystemTray" xml:space="preserve">
+    <value>Bật chức năng khay hệ thống</value>
+  </data>
+  <data name="CheckBox_MinimizeToTray" xml:space="preserve">
+    <value>Tự động ẩn vào khay khi thu nhỏ</value>
+  </data>
+  <data name="Label_MinimizeToTray" xml:space="preserve">
+    <value>Tự động ẩn vào khay khi thu nhỏ</value>
+  </data>
+  <data name="Label_CloseAction" xml:space="preserve">
+    <value>Hành động khi đóng cửa sổ:</value>
+  </data>
+  <data name="CloseAction_Ask" xml:space="preserve">
+    <value>Hỏi người dùng</value>
+  </data>
+  <data name="CloseAction_Minimize" xml:space="preserve">
+    <value>Thu nhỏ vào khay</value>
+  </data>
+  <data name="CloseAction_Exit" xml:space="preserve">
+    <value>Thoát trực tiếp</value>
+  </data>
+  <data name="Group_ThreadPool" xml:space="preserve">
+    <value>Cấu hình thread pool</value>
+  </data>
+  <data name="CheckBox_EnableThreadPool" xml:space="preserve">
+    <value>Bật thread pool (để xử lý đồng thời nhiều tệp)</value>
+  </data>
+  <data name="Label_EnableThreadPool" xml:space="preserve">
+    <value>Bật thread pool (để xử lý đồng thời nhiều tệp)</value>
+  </data>
+  <data name="Label_ThreadPoolSize" xml:space="preserve">
+    <value>Kích thước thread pool (số lượng đồng thời):</value>
+  </data>
+  <data name="Group_ImageCompression" xml:space="preserve">
+    <value>Cấu hình nén hình ảnh</value>
+  </data>
+  <data name="CheckBox_EnableImageCompression" xml:space="preserve">
+    <value>Bật nén hình ảnh (tự động nén hình ảnh lớn)</value>
+  </data>
+  <data name="Label_EnableImageCompression" xml:space="preserve">
+    <value>Bật nén hình ảnh (tự động nén hình ảnh lớn)</value>
+  </data>
+  <data name="Label_CompressionThreshold" xml:space="preserve">
+    <value>Ngưỡng nén (KB, nén nếu lớn hơn giá trị này):</value>
+  </data>
+  <data name="Label_CompressionQuality" xml:space="preserve">
+    <value>Chất lượng nén (1-100, giá trị càng nhỏ tỷ lệ nén càng cao):</value>
+  </data>
+  <data name="Button_Save" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="Button_Cancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="Label_Language" xml:space="preserve">
+    <value>Ngôn ngữ giao diện:</value>
+  </data>
+  <data name="Language_ChineseSimplified" xml:space="preserve">
+    <value>中文简体</value>
+  </data>
+  <data name="Language_ChineseTraditional" xml:space="preserve">
+    <value>繁体中文</value>
+  </data>
+  <data name="Language_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Language_Japanese" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="Language_Vietnamese" xml:space="preserve">
+    <value>Tiếng Việt</value>
+  </data>
+
+  <!-- Form giới thiệu -->
+  <data name="AboutForm_Title" xml:space="preserve">
+    <value>Giới thiệu</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>Hệ thống tải lên tệp</value>
+  </data>
+  <data name="About_WindowTitle" xml:space="preserve">
+    <value>Giới thiệu</value>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>Phiên bản: 2.0</value>
+  </data>
+  <data name="About_Description" xml:space="preserve">
+    <value>Ứng dụng tải lên tệp dựa trên .NET 6.0 Windows Forms</value>
+  </data>
+  <data name="About_Features" xml:space="preserve">
+    <value>Chức năng chính:
+
+✓ Có thể tải lên hình ảnh</value>
+  </data>
+  <data name="About_Copyright" xml:space="preserve">
+    <value>© 2025 Hệ thống tải lên tệp.Powered by LUX EAP TEAM. All rights reserved.</value>
+  </data>
+  <data name="Button_Close" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  
+  <!-- Thông báo -->
+  <data name="Message_ConfigSaved" xml:space="preserve">
+    <value>Cấu hình đã được lưu thành công！
+
+Bạn có muốn khởi động lại chương trình ngay để áp dụng cấu hình không？</value>
+  </data>
+  <data name="Message_ConfigSavedTitle" xml:space="preserve">
+    <value>Cấu hình đã được lưu</value>
+  </data>
+  <data name="Message_Error" xml:space="preserve">
+    <value>Lỗi</value>
+  </data>
+  <data name="Message_Success" xml:space="preserve">
+    <value>Thành công</value>
+  </data>
+  <data name="Message_Warning" xml:space="preserve">
+    <value>Cảnh báo</value>
+  </data>
+  <data name="Message_Info" xml:space="preserve">
+    <value>Thông tin</value>
+  </data>
+  <data name="Message_Confirm" xml:space="preserve">
+    <value>Xác nhận</value>
+  </data>
+  <data name="Message_NotConfigured" xml:space="preserve">
+    <value>Chưa cấu hình</value>
+  </data>
+  <data name="Message_FolderExists" xml:space="preserve">
+    <value>Thư mục này đã có trong danh sách giám sát</value>
+  </data>
+  <data name="Message_SelectFolder" xml:space="preserve">
+    <value>Vui lòng chọn thư mục cần xóa trước</value>
+  </data>
+  <data name="Message_MinimizeToTray" xml:space="preserve">
+    <value>Bạn có muốn thu nhỏ vào khay hệ thống không?
+
+Nhấp "Có" để thu nhỏ vào khay
+Nhấp "Không" để thoát chương trình</value>
+  </data>
+  <data name="Tray_ShowMainWindow" xml:space="preserve">
+    <value>Hiển thị cửa sổ chính</value>
+  </data>
+  <data name="Tray_StartTask" xml:space="preserve">
+    <value>Bắt đầu tác vụ</value>
+  </data>
+  <data name="Tray_StopTask" xml:space="preserve">
+    <value>Dừng tác vụ</value>
+  </data>
+  <data name="Tray_OpenConfig" xml:space="preserve">
+    <value>Mở cấu hình</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>Thoát chương trình</value>
+  </data>
+  <data name="Tray_MinimizedMessage" xml:space="preserve">
+    <value>Chương trình đã được thu nhỏ vào khay hệ thống</value>
+  </data>
+</root>
+
