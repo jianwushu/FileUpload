@@ -1,17 +1,20 @@
 using FileUpload.Models;
 using FileUpload.Services;
 using FileUpload.utils;
+using System.Collections.Concurrent;
 
 namespace FileUpload
 {
     public partial class Form1 : Form
     {
         private AppConfig? _config;
-        private FileUploadService? _uploadService;
+        private FileUploadServiceOptimized? _uploadService;
         private ServiceHeartbeatManager? _heartbeatManager;
         private System.Windows.Forms.Timer? _statsTimer;
+        private System.Windows.Forms.Timer? _logUpdateTimer;
         private NotifyIcon? _notifyIcon;
         private const int MaxLogLines = 1000;
+        private readonly ConcurrentQueue<string> _logQueue = new ConcurrentQueue<string>();
 
         public Form1()
         {
@@ -28,6 +31,12 @@ namespace FileUpload
 
                 // 订阅日志事件
                 LogManager.LogReceived += OnLogReceived;
+
+                // 初始化日志批量更新定时器（优化UI性能）
+                _logUpdateTimer = new System.Windows.Forms.Timer();
+                _logUpdateTimer.Interval = 500; // 每500ms批量更新一次日志
+                _logUpdateTimer.Tick += BatchUpdateLogs;
+                _logUpdateTimer.Start();
 
                 // 初始化统计定时器
                 _statsTimer = new System.Windows.Forms.Timer();
@@ -274,7 +283,7 @@ namespace FileUpload
                 }
 
                 // 创建并启动上传服务
-                _uploadService = new FileUploadService(_config);
+                _uploadService = new FileUploadServiceOptimized(_config);
                 _uploadService.Start();
 
                 // 更新UI状态
@@ -323,28 +332,54 @@ namespace FileUpload
             txtLog.Clear();
         }
 
+        /// <summary>
+        /// 日志接收事件（放入队列，不直接更新UI）
+        /// </summary>
         private void OnLogReceived(string logMessage)
         {
-            // 使用Invoke确保在UI线程上更新
-            if (InvokeRequired)
-            {
-                Invoke(new Action<string>(OnLogReceived), logMessage);
+            // 放入队列，由定时器批量更新UI（避免频繁UI操作导致卡顿）
+            _logQueue.Enqueue(logMessage);
+        }
+
+        /// <summary>
+        /// 批量更新日志到UI（由定时器调用）
+        /// </summary>
+        private void BatchUpdateLogs(object? sender, EventArgs e)
+        {
+            // 如果队列为空，直接返回
+            if (_logQueue.IsEmpty)
                 return;
-            }
 
-            // 添加日志到文本框
-            txtLog.AppendText(logMessage + Environment.NewLine);
-
-            // 限制日志行数
-            var lines = txtLog.Lines;
-            if (lines.Length > MaxLogLines)
+            try
             {
-                txtLog.Lines = lines.Skip(lines.Length - MaxLogLines).ToArray();
-            }
+                // 每次最多批量处理100条日志
+                var batch = new List<string>();
+                while (batch.Count < 100 && _logQueue.TryDequeue(out var logMessage))
+                {
+                    batch.Add(logMessage);
+                }
 
-            // 自动滚动到底部
-            txtLog.SelectionStart = txtLog.Text.Length;
-            txtLog.ScrollToCaret();
+                if (batch.Count > 0)
+                {
+                    // 批量添加到TextBox
+                    txtLog.AppendText(string.Join(Environment.NewLine, batch) + Environment.NewLine);
+
+                    // 限制日志行数（只在批量更新时检查，减少性能消耗）
+                    var lines = txtLog.Lines;
+                    if (lines.Length > MaxLogLines)
+                    {
+                        txtLog.Lines = lines.Skip(lines.Length - MaxLogLines).ToArray();
+                    }
+
+                    // 自动滚动到底部
+                    txtLog.SelectionStart = txtLog.Text.Length;
+                    txtLog.ScrollToCaret();
+                }
+            }
+            catch
+            {
+                // 忽略批量更新错误
+            }
         }
 
         private void UpdateStatistics(object? sender, EventArgs e)
@@ -430,6 +465,9 @@ namespace FileUpload
                 // 停止定时器
                 _statsTimer?.Stop();
                 _statsTimer?.Dispose();
+
+                _logUpdateTimer?.Stop();
+                _logUpdateTimer?.Dispose();
 
                 // 停止上传服务
                 if (_uploadService != null)

@@ -254,7 +254,7 @@ namespace FileUpload
             // numScanInterval
             // 
             numScanInterval.Location = new Point(150, 217);
-            numScanInterval.Maximum = new decimal(new int[] { 60, 0, 0, 0 });
+            numScanInterval.Maximum = new decimal(new int[] { 43200, 0, 0, 0 });
             numScanInterval.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numScanInterval.Name = "numScanInterval";
             numScanInterval.Size = new Size(100, 23);

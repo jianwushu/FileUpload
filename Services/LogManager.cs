@@ -49,8 +49,8 @@ namespace FileUpload.Services
                 // 写入CSV日志
                 WriteToCsvLog(log.ToCsvString());
 
-                // 触发UI更新事件
-                LogReceived?.Invoke(logMessage);
+                // 异步触发UI更新事件，避免阻塞上传线程
+                Task.Run(() => LogReceived?.Invoke(logMessage));
             }
             catch (Exception ex)
             {
@@ -66,7 +66,8 @@ namespace FileUpload.Services
         {
             var logMessage = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] [INFO] {message}";
             WriteToTextLog(logMessage);
-            LogReceived?.Invoke(logMessage);
+            // 异步触发UI更新事件
+            Task.Run(() => LogReceived?.Invoke(logMessage));
         }
 
         /// <summary>
@@ -76,7 +77,8 @@ namespace FileUpload.Services
         {
             var logMessage = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] [WARN] {message}";
             WriteToTextLog(logMessage);
-            LogReceived?.Invoke(logMessage);
+            // 异步触发UI更新事件
+            Task.Run(() => LogReceived?.Invoke(logMessage));
         }
 
         /// <summary>
@@ -90,7 +92,8 @@ namespace FileUpload.Services
                 logMessage += $" | 异常: {ex.Message}";
             }
             WriteToTextLog(logMessage);
-            LogReceived?.Invoke(logMessage);
+            // 异步触发UI更新事件
+            Task.Run(() => LogReceived?.Invoke(logMessage));
         }
 
         /// <summary>
