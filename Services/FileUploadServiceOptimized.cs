@@ -1,5 +1,9 @@
 using FileUpload.Models;
+using FileUpload.utils;
 using System.Diagnostics;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Channels;
 
 namespace FileUpload.Services
@@ -22,8 +26,8 @@ namespace FileUpload.Services
         private CancellationTokenSource? _cancellationTokenSource;
         private Task? _uploadTask;
         private Channel<string>? _fileChannel;
-        // private readonly int _batchSize = 1000; // 每批处理1000个文件（暂未使用）
-        private readonly int _channelCapacity = 10000; // 队列容量
+
+        private readonly int _channelCapacity = 10000;
 
         public FileUploadServiceOptimized(AppConfig config)
         {
@@ -410,6 +414,125 @@ namespace FileUpload.Services
         }
 
         /// <summary>
+        /// 上传单个文件
+        /// </summary>
+        private async Task<(bool isSuccess, string? errorMessage, int? statusCode)> UploadFile(string filePath, int retryCount)
+        {
+            var stopwatch = Stopwatch.StartNew();
+            var fileName = Path.GetFileName(filePath);
+            var fileInfo = new FileInfo(filePath);
+
+            try
+            {
+                using var form = new MultipartFormDataContent();
+
+                // 构建JSON请求体
+                var jsonBody = BuildJsonRequestBody(fileName, filePath);
+                form.Add(new StringContent(jsonBody, Encoding.UTF8, "application/json"), _config.JsonRequestBody.FieldName);
+
+                // 添加文件（支持图片压缩）
+                byte[] fileData;
+                long originalFileSize = fileInfo.Length;
+                long uploadFileSize = originalFileSize;
+
+                // 判断是否需要压缩
+                if (_config.EnableImageCompression &&
+                    _imageCompressionService != null &&
+                    ImageCompressionService.IsImageFile(filePath) &&
+                    _imageCompressionService.ShouldCompress(filePath))
+                {
+                    var (compressedData, origSize, compSize) = await _imageCompressionService.CompressImageAsync(filePath);
+                    fileData = compressedData;
+                    uploadFileSize = compSize;
+                }
+                else
+                {
+                    fileData = await File.ReadAllBytesAsync(filePath);
+                }
+
+                var fileContent = new ByteArrayContent(fileData);
+                fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
+                form.Add(fileContent, "File", fileName);
+
+                // 发送请求
+                var response = await _httpClient.PostAsync(_config.UploadUrl, form);
+                stopwatch.Stop();
+
+                var isSuccess = response.IsSuccessStatusCode;
+                var statusCode = (int)response.StatusCode;
+                string? errorMessage = null;
+
+                var responseContent = await response.Content.ReadAsStringAsync();
+
+                // {"COMMAND":"SENDDATA","LINE":null,"STATION_NAME":null,"BARCODE":"11S55HFF096X6","TOOLINGNO":"R05A_CR0395","CAVITYNO":"A1","MACHINENO":"IMG-TEST-01","LOTNO":"","RESULT":"NG","RESULT_INFO":"设备编号[SENDDATA]未检索到站点信息,请检查!"}
+                LogManager.LogInfo($"上传响应: {responseContent}");
+
+                if (!isSuccess)
+                {
+                    errorMessage = $"HTTP {statusCode}: {responseContent}";
+                }
+                else
+                {
+                    var res = JsonSerializer.Deserialize<ApiResponse>(responseContent);
+                    if (res != null && res.RESULT == "NG")
+                    {
+                        isSuccess = false;
+                        errorMessage = res.RESULT_INFO;
+                    }
+                    else if (res != null && res.RESULT == "OK")
+                    {
+                        isSuccess = true;
+                    }
+                }
+
+                // 记录日志
+                var log = new UploadLog
+                {
+                    UploadTime = DateTime.Now,
+                    FileDirectory = Path.GetDirectoryName(filePath) ?? "",
+                    FileName = fileName,
+                    FileSize = fileInfo.Length,
+                    IsSuccess = isSuccess,
+                    ElapsedMilliseconds = stopwatch.ElapsedMilliseconds,
+                    ErrorMessage = errorMessage,
+                    HttpStatusCode = statusCode,
+                    DeviceId = _config.DeviceId,
+                    RetryCount = retryCount
+                };
+
+                LogManager.LogUpload(log);
+
+                return (isSuccess, errorMessage, statusCode);
+            }
+            catch (InvalidOperationException ex) when (ex.Message.Contains("图片名称不合法"))
+            {
+                // 文件名解析失败，直接抛出异常，让上层处理（不重试）
+                throw;
+            }
+            catch (Exception ex)
+            {
+                stopwatch.Stop();
+
+                var log = new UploadLog
+                {
+                    UploadTime = DateTime.Now,
+                    FileDirectory = Path.GetDirectoryName(filePath) ?? "",
+                    FileName = fileName,
+                    FileSize = fileInfo.Length,
+                    IsSuccess = false,
+                    ElapsedMilliseconds = stopwatch.ElapsedMilliseconds,
+                    ErrorMessage = ex.Message,
+                    DeviceId = _config.DeviceId,
+                    RetryCount = retryCount
+                };
+
+                LogManager.LogUpload(log);
+
+                return (false, ex.Message, null);
+            }
+        }
+
+        /// <summary>
         /// 测试上传文件（简化版，实际应调用真实的上传API）
         /// </summary>
         private async Task<(bool isSuccess, string? errorMessage)> UploadFileTest(string filePath, int retryCount)
@@ -561,7 +684,129 @@ namespace FileUpload.Services
                 }
             }
         }
-        
+
+
+        /// <summary>
+        /// 构建JSON格式请求体
+        /// </summary>
+        private string BuildJsonRequestBody(string fileName, string filePath)
+        {
+            var jsonParams = new Dictionary<string, string>();
+
+            // 1. 添加固定参数
+            if (_config.JsonRequestBody.FixedParams != null)
+            {
+                foreach (var kvp in _config.JsonRequestBody.FixedParams)
+                {
+                    jsonParams[kvp.Key] = kvp.Value;
+                }
+            }
+
+            // 2. 从文件名提取参数
+            if (_fileNameParser != null)
+            {
+                var fileNameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
+                var extractedParams = _fileNameParser.ParseFileName(fileNameWithoutExt);
+
+                // 只添加配置中指定需要提取的参数
+                if (_config.JsonRequestBody.ExtractParams != null)
+                {
+                    foreach (var paramName in _config.JsonRequestBody.ExtractParams)
+                    {
+                        if (extractedParams.ContainsKey(paramName))
+                        {
+                            var paramValue = extractedParams[paramName];
+
+                            // 检查是否启用空值拒绝功能
+                            if (_config.FileNameParseRules?.RejectEmptyValues == true && string.IsNullOrWhiteSpace(paramValue))
+                            {
+                                throw new InvalidOperationException($"图片名称不合法: 参数 [{paramName}] 的值为空");
+                            }
+
+                            jsonParams[paramName] = paramValue;
+                        }
+                        else
+                        {
+                            // 如果启用空值拒绝功能，且参数未提取到，也认为是异常
+                            if (_config.FileNameParseRules?.RejectEmptyValues == true)
+                            {
+                                throw new InvalidOperationException($"图片名称不合法: 参数 [{paramName}] 未能从文件名中提取");
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 3. 添加自动生成的参数
+            if (_config.JsonRequestBody.AutoGenerateParams != null)
+            {
+                // 获取文件信息（用于多个参数）
+                var fileInfo = new FileInfo(filePath);
+
+                foreach (var kvp in _config.JsonRequestBody.AutoGenerateParams)
+                {
+                    var paramName = kvp.Key;
+                    var paramType = kvp.Value.ToUpper();
+
+                    switch (paramType)
+                    {
+                        case "FILENAME":
+                            jsonParams[paramName] = fileName;
+                            break;
+                        case "CREATETIME":
+                            // 从文件创建时间获取
+                            jsonParams[paramName] = fileInfo.CreationTime.ToString("yyyyMMddHHmmss");
+                            break;
+                        case "MODIFYTIME":
+                            // 从文件修改时间获取
+                            jsonParams[paramName] = fileInfo.LastWriteTime.ToString("yyyyMMddHHmmss");
+                            break;
+                        case "DATETIME":
+                            // DATETIME 使用当前时间（保持原有行为）
+                            jsonParams[paramName] = DateTime.Now.ToString("yyyyMMddHHmmss");
+                            break;
+                        case "COMPUTERNO":
+                            jsonParams[paramName] = Environment.MachineName;
+                            break;
+                        case "COMPUTERIP":
+                            jsonParams[paramName] = ToolHelper.GetLocalIPAddress();
+                            break;
+                        case "LOCAL_PATH":
+                            jsonParams[paramName] = Path.GetDirectoryName(filePath) ?? "";
+                            break;
+                        case "FILESIZE":
+                        case "ORI_FILESIZE_KB":
+                            var sizeKB = (int)Math.Ceiling(fileInfo.Length / 1024.0);
+                            jsonParams[paramName] = sizeKB.ToString();
+                            break;
+                        default:
+                            // 如果是固定值，直接使用
+                            jsonParams[paramName] = kvp.Value;
+                            break;
+                    }
+                }
+            }
+
+            if (!jsonParams.ContainsKey("MACHINENO") || jsonParams["MACHINENO"].Equals(""))
+            {
+                jsonParams["MACHINENO"] = _config.DeviceId;
+            }
+
+            if (!jsonParams.ContainsKey("COMMAND") || jsonParams["COMMAND"].Equals(""))
+            {
+                jsonParams["COMMAND"] = _config.Command;
+            }
+
+            // 序列化为JSON字符串
+            var jsonString = JsonSerializer.Serialize(jsonParams, new JsonSerializerOptions
+            {
+                WriteIndented = false,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            });
+
+            LogManager.LogInfo($"JSON请求体: {jsonString}");
+            return jsonString;
+        }
         /// <summary>
         /// 释放资源
         /// </summary>
