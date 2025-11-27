@@ -1,4 +1,3 @@
-using System.Drawing;
 using System.Drawing.Imaging;
 
 namespace FileUpload.Services
@@ -54,7 +53,7 @@ namespace FileUpload.Services
                 
                 // 设置压缩质量
                 var encoderParameters = new EncoderParameters(1);
-                encoderParameters.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)_quality);
+                encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, (long)_quality);
                 
                 // 保存压缩后的图片到内存流
                 originalImage.Save(memoryStream, jpegEncoder, encoderParameters);

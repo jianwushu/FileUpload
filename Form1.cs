@@ -1,5 +1,6 @@
 using FileUpload.Models;
 using FileUpload.Services;
+using FileUpload.utils;
 
 namespace FileUpload
 {
@@ -7,6 +8,7 @@ namespace FileUpload
     {
         private AppConfig? _config;
         private FileUploadService? _uploadService;
+        private ServiceHeartbeatManager? _heartbeatManager;
         private System.Windows.Forms.Timer? _statsTimer;
         private NotifyIcon? _notifyIcon;
         private const int MaxLogLines = 1000;
@@ -32,6 +34,9 @@ namespace FileUpload
                 _statsTimer.Interval = 2000; // 每2秒更新一次统计
                 _statsTimer.Tick += UpdateStatistics;
                 _statsTimer.Start();
+
+                // 初始化心跳管理器
+                InitializeHeartbeatManager();
 
                 LogManager.LogInfo("程序启动成功");
             }
@@ -103,6 +108,14 @@ namespace FileUpload
                 _uploadService = null;
             }
 
+            // 停止心跳
+            if (_heartbeatManager != null)
+            {
+                _heartbeatManager.StopHeartbeat();
+                _heartbeatManager.Dispose();
+                _heartbeatManager = null;
+            }
+
             // 隐藏托盘图标
             if (_notifyIcon != null)
             {
@@ -153,6 +166,93 @@ namespace FileUpload
                 MessageBox.Show($"加载配置文件失败: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 _config = new AppConfig(); // 使用默认配置
             }
+        }
+
+        /// <summary>
+        /// 初始化心跳管理器
+        /// </summary>
+        private void InitializeHeartbeatManager()
+        {
+            try
+            {
+                if (_config == null)
+                {
+                    return;
+                }
+
+                // 创建心跳管理器
+                _heartbeatManager = new ServiceHeartbeatManager();
+
+                // 订阅心跳状态变化事件
+                _heartbeatManager.HeartbeatStatusChanged += OnHeartbeatStatusChanged;
+
+                // 如果配置了自动注册，则自动注册服务
+                if (_config.ServiceRegistration.AutoRegister)
+                {
+                    Task.Run(async () => await AutoRegisterService());
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogError($"初始化心跳管理器失败: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// 自动注册服务
+        /// </summary>
+        private async Task AutoRegisterService()
+        {
+            try
+            {
+                if (_config == null || string.IsNullOrWhiteSpace(_config.ServiceRegistration.ServiceCenterApi))
+                {
+                    LogManager.LogWarning("服务中心API未配置，跳过自动注册");
+                    return;
+                }
+
+                LogManager.LogInfo("正在自动注册服务...");
+
+                var result = await ApiHelper.RegisterServiceDiscoveryAsync(
+                    _config.ServiceRegistration.ServiceCenterApi,
+                    _config.DeviceId);
+
+                if (result.Success)
+                {
+                    _config.ServiceRegistration.RegistrationStatus = "注册成功";
+                    _config.ServiceRegistration.LastRegistrationTime = DateTime.Now;
+                    ConfigManager.SaveConfig(_config);
+
+                    LogManager.LogInfo("服务自动注册成功");
+
+                    // 启动心跳
+                    _heartbeatManager?.SetRegistrationStatus(true);
+                }
+                else
+                {
+                    LogManager.LogError($"服务自动注册失败: {result.StatusCode} - {result.ErrorMessage}");
+                }
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogError($"服务自动注册异常: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// 心跳状态变化事件处理
+        /// </summary>
+        private void OnHeartbeatStatusChanged(object? sender, HeartbeatStatusEventArgs e)
+        {
+            // 在UI线程上更新
+            if (InvokeRequired)
+            {
+                Invoke(new Action<object?, HeartbeatStatusEventArgs>(OnHeartbeatStatusChanged), sender, e);
+                return;
+            }
+
+            // 可以在这里更新UI显示心跳状态
+            // 例如在状态栏显示最后心跳时间等
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -390,6 +490,29 @@ namespace FileUpload
             catch (Exception ex)
             {
                 MessageBox.Show($"打开关于页面失败: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void menuGenerateTestImages_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_config == null)
+                {
+                    MessageBox.Show(
+                        "配置未加载，请先启动程序！",
+                        "错误",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+
+                using var testForm = new TestImageGeneratorForm(_config);
+                testForm.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"打开测试图片生成器失败: {ex.Message}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

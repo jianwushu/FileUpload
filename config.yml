@@ -9,7 +9,6 @@ uploadUrl: http://10.18.53.14:8081/GwService/SendDataToMES
 language: 
 
 # 监控的文件夹列表（支持多个文件夹）
-# 如果配置了 watchFolders，则 watchFolder 配置将被忽略
 watchFolders:
   - D:\Upload\Watch
   # - D:\Upload\Watch2

@@ -31,6 +31,7 @@
             menuStrip = new MenuStrip();
             menuFile = new ToolStripMenuItem();
             menuConfig = new ToolStripMenuItem();
+            menuGenerateTestImages = new ToolStripMenuItem();
             menuExit = new ToolStripMenuItem();
             menuHelp = new ToolStripMenuItem();
             menuAbout = new ToolStripMenuItem();
@@ -82,7 +83,7 @@
             //
             // menuFile
             //
-            menuFile.DropDownItems.AddRange(new ToolStripItem[] { menuConfig, menuExit });
+            menuFile.DropDownItems.AddRange(new ToolStripItem[] { menuConfig, menuGenerateTestImages, menuExit });
             menuFile.Name = "menuFile";
             menuFile.Size = new Size(58, 21);
             menuFile.Text = Resources.Strings.Menu_File;
@@ -93,6 +94,13 @@
             menuConfig.Size = new Size(180, 22);
             menuConfig.Text = Resources.Strings.Menu_Config;
             menuConfig.Click += menuConfig_Click;
+            //
+            // menuGenerateTestImages
+            //
+            menuGenerateTestImages.Name = "menuGenerateTestImages";
+            menuGenerateTestImages.Size = new Size(180, 22);
+            menuGenerateTestImages.Text = "生成测试图片";
+            menuGenerateTestImages.Click += menuGenerateTestImages_Click;
             //
             // menuExit
             //
@@ -499,6 +507,7 @@
         private MenuStrip menuStrip;
         private ToolStripMenuItem menuFile;
         private ToolStripMenuItem menuConfig;
+        private ToolStripMenuItem menuGenerateTestImages;
         private ToolStripMenuItem menuExit;
         private ToolStripMenuItem menuHelp;
         private ToolStripMenuItem menuAbout;

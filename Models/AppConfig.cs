@@ -134,6 +134,12 @@ namespace FileUpload.Models
         public string Language { get; set; } = "zh-CN";
 
         /// <summary>
+        /// 服务注册配置
+        /// </summary>
+        [YamlMember(Alias = "serviceRegistration")]
+        public ServiceRegistrationConfig ServiceRegistration { get; set; } = new ServiceRegistrationConfig();
+
+        /// <summary>
         /// 获取所有监控文件夹（兼容旧配置）
         /// </summary>
         /// <returns>监控文件夹列表</returns>
@@ -263,6 +269,54 @@ namespace FileUpload.Models
         /// </summary>
         [YamlMember(Alias = "closeAction")]
         public string CloseAction { get; set; } = "ask";
+    }
+
+    /// <summary>
+    /// 服务注册配置
+    /// </summary>
+    public class ServiceRegistrationConfig
+    {
+        /// <summary>
+        /// 服务中心API地址
+        /// </summary>
+        [YamlMember(Alias = "serviceCenterApi")]
+        public string ServiceCenterApi { get; set; } = "http://localhost:8080/api/service-center";
+
+        /// <summary>
+        /// 是否自动注册服务
+        /// </summary>
+        [YamlMember(Alias = "autoRegister")]
+        public bool AutoRegister { get; set; } = false;
+
+        /// <summary>
+        /// 是否启用心跳
+        /// </summary>
+        [YamlMember(Alias = "enableHeartbeat")]
+        public bool EnableHeartbeat { get; set; } = true;
+
+        /// <summary>
+        /// 心跳间隔（秒），即TTL时间
+        /// </summary>
+        [YamlMember(Alias = "heartbeatInterval")]
+        public int HeartbeatInterval { get; set; } = 30;
+
+        /// <summary>
+        /// 服务注册状态
+        /// </summary>
+        [YamlMember(Alias = "registrationStatus")]
+        public string RegistrationStatus { get; set; } = "未注册";
+
+        /// <summary>
+        /// 最后注册时间
+        /// </summary>
+        [YamlMember(Alias = "lastRegistrationTime")]
+        public DateTime? LastRegistrationTime { get; set; }
+
+        /// <summary>
+        /// 最后心跳时间
+        /// </summary>
+        [YamlMember(Alias = "lastHeartbeatTime")]
+        public DateTime? LastHeartbeatTime { get; set; }
     }
 }
 

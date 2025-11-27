@@ -72,11 +72,7 @@ namespace FileUpload.Services
 
             // 显示监控文件夹信息
             var watchFolders = _config.GetWatchFolders();
-            if (watchFolders.Count == 1)
-            {
-                LogManager.LogInfo($"监控文件夹: {watchFolders[0]}");
-            }
-            else if (watchFolders.Count > 1)
+            if (watchFolders.Count > 0)
             {
                 LogManager.LogInfo($"监控文件夹 ({watchFolders.Count} 个):");
                 for (int i = 0; i < watchFolders.Count; i++)
@@ -296,7 +292,7 @@ namespace FileUpload.Services
                         continue;
                     }
 
-                    var result = await UploadFile(filePath, retryCount);
+                    var result = await UploadFileTest(filePath, retryCount);
                     success = result.isSuccess;
                     errorMessage = result.errorMessage;
 
@@ -424,6 +420,102 @@ namespace FileUpload.Services
                         isSuccess = true;
                     }
                 }
+
+                // 记录日志
+                var log = new UploadLog
+                {
+                    UploadTime = DateTime.Now,
+                    FileDirectory = Path.GetDirectoryName(filePath) ?? "",
+                    FileName = fileName,
+                    FileSize = fileInfo.Length,
+                    IsSuccess = isSuccess,
+                    ElapsedMilliseconds = stopwatch.ElapsedMilliseconds,
+                    ErrorMessage = errorMessage,
+                    HttpStatusCode = statusCode,
+                    DeviceId = _config.DeviceId,
+                    RetryCount = retryCount
+                };
+
+                LogManager.LogUpload(log);
+
+                return (isSuccess, errorMessage, statusCode);
+            }
+            catch (InvalidOperationException ex) when (ex.Message.Contains("图片名称不合法"))
+            {
+                // 文件名解析失败，直接抛出异常，让上层处理（不重试）
+                throw;
+            }
+            catch (Exception ex)
+            {
+                stopwatch.Stop();
+
+                var log = new UploadLog
+                {
+                    UploadTime = DateTime.Now,
+                    FileDirectory = Path.GetDirectoryName(filePath) ?? "",
+                    FileName = fileName,
+                    FileSize = fileInfo.Length,
+                    IsSuccess = false,
+                    ElapsedMilliseconds = stopwatch.ElapsedMilliseconds,
+                    ErrorMessage = ex.Message,
+                    DeviceId = _config.DeviceId,
+                    RetryCount = retryCount
+                };
+
+                LogManager.LogUpload(log);
+
+                return (false, ex.Message, null);
+            }
+        }
+
+        /// <summary>
+        /// 上传单个文件
+        /// </summary>
+        private async Task<(bool isSuccess, string? errorMessage, int? statusCode)> UploadFileTest(string filePath, int retryCount)
+        {
+            var stopwatch = Stopwatch.StartNew();
+            var fileName = Path.GetFileName(filePath);
+            var fileInfo = new FileInfo(filePath);
+
+            try
+            {
+                using var form = new MultipartFormDataContent();
+
+                // 构建JSON请求体
+                var jsonBody = BuildJsonRequestBody(fileName, filePath);
+                form.Add(new StringContent(jsonBody, Encoding.UTF8, "application/json"), _config.JsonRequestBody.FieldName);
+
+                // 添加文件（支持图片压缩）
+                byte[] fileData;
+                long originalFileSize = fileInfo.Length;
+                long uploadFileSize = originalFileSize;
+
+                // 判断是否需要压缩
+                if (_config.EnableImageCompression &&
+                    _imageCompressionService != null &&
+                    ImageCompressionService.IsImageFile(filePath) &&
+                    _imageCompressionService.ShouldCompress(filePath))
+                {
+                    var (compressedData, origSize, compSize) = await _imageCompressionService.CompressImageAsync(filePath);
+                    fileData = compressedData;
+                    uploadFileSize = compSize;
+                }
+                else
+                {
+                    fileData = await File.ReadAllBytesAsync(filePath);
+                }
+
+                var fileContent = new ByteArrayContent(fileData);
+                fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
+                form.Add(fileContent, "File", fileName);
+
+                await Task.Delay(200);
+
+                stopwatch.Stop();
+
+                var isSuccess = true;
+                var statusCode = 200;
+                string? errorMessage = null;
 
                 // 记录日志
                 var log = new UploadLog

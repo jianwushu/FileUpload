@@ -9,7 +9,10 @@ namespace FileUpload.Services
     /// </summary>
     public class ConfigManager
     {
-        private static readonly string ConfigFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.yml");
+        /// <summary>
+        /// 配置文件路径
+        /// </summary>
+        public static readonly string ConfigFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.yml");
         private static AppConfig? _cachedConfig;
 
         /// <summary>
